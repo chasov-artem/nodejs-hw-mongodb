@@ -11,9 +11,17 @@ export const setupServer = () => {
   app.use(express.json());
   app.use(logger);
 
-  app.use('/contacts', contactsRouter);
+  app.use(
+    '/contacts',
+    (req, res, next) => {
+      console.log(`Incoming request: ${req.method} ${req.originalUrl}`);
+      next();
+    },
+    contactsRouter,
+  );
 
   app.use((req, res) => {
+    console.log(`404 Not Found for: ${req.method} ${req.originalUrl}`);
     res.status(404).json({ message: 'Not Found' });
   });
 

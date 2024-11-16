@@ -1,6 +1,6 @@
 import mongoose from 'momgoose';
 
-const concactSchema = new mongoose.Schema(
+const contactSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     phoneNumber: { type: Number, required: true },

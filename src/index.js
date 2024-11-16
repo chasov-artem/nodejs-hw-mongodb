@@ -1,10 +1,14 @@
 import { initMongoDB } from './db/initMongoDB.js';
 import { setupServer } from './server.js';
-import 'dotenv/config';
 
 const bootstrap = async () => {
-  await initMongoDB();
-  setupServer();
+  try {
+    await initMongoDB();
+    setupServer();
+  } catch {
+    (error) => console.error('Failed to initialize application:', error);
+    process.exit(1);
+  }
 };
 
 bootstrap();

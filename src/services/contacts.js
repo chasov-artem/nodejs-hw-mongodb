@@ -11,3 +11,7 @@ export const findContactById = async (id) => {
 export const createContact = async (contact) => {
   return await Contact.create(contact);
 };
+
+export const deleteContact = async (contactId) => {
+  return Contact.findByIdAndDelete(contactId);
+};

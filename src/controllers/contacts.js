@@ -1,8 +1,12 @@
-import { getAllContacts, findContactById } from '../services/contacts.js';
+import {
+  getAllContacts,
+  findContactById,
+  createContact,
+} from '../services/contacts.js';
 import createError from 'http-errors';
 import mongoose from 'mongoose';
 
-export const getContacts = async (req, res) => {
+export const getContactsCtrl = async (req, res) => {
   const contacts = await getAllContacts();
   res.status(200).json({
     status: 200,
@@ -11,7 +15,7 @@ export const getContacts = async (req, res) => {
   });
 };
 
-export const getContactById = async (req, res, next) => {
+export const getContactByIdCtrl = async (req, res, next) => {
   const { contactId } = req.params;
 
   try {
@@ -23,7 +27,7 @@ export const getContactById = async (req, res, next) => {
     if (!contact) {
       throw createError.NotFound('Student not found');
     }
-    res.status(200).json({
+    res.status(200).send({
       status: 200,
       message: 'Successfully found contact with id {contactId}!',
       data: contact,
@@ -31,4 +35,24 @@ export const getContactById = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+export const createContactCtrl = async (req, res) => {
+  const contact = {
+    name: req.body.name,
+    phoneNumber: req.body.phoneNumber,
+    email: req.body.email,
+    isFavourite: req.body.isFavourite,
+    contactType: req.body.contactType,
+  };
+  const result = await createContact(contact);
+
+  console.log(result);
+  res
+    .status(201)
+    .send({
+      status: 201,
+      message: 'Successfully created a contact!',
+      data: contact,
+    });
 };

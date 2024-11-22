@@ -10,7 +10,7 @@ export const setupServer = () => {
   const logger = pino();
 
   app.use(cors());
-  app.use(express.json());
+
   app.use(logger);
 
   app.use('/contacts', contactsRouter);

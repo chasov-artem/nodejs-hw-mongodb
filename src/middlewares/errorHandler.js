@@ -1,7 +1,7 @@
 import { isHttpError } from 'http-errors';
 
 const errorHandler = (err, req, res, next) => {
-  if (isHttpError(err)) {
+  if (isHttpError(err) === true) {
     return res
       .status(err.statusCode)
       .send({ status: err.statusCode, message: err.message });

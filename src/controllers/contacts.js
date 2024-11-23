@@ -4,6 +4,7 @@ import {
   createContact,
   deleteContact,
 } from '../services/contacts.js';
+import createHttpError from 'http-errors';
 import createError from 'http-errors';
 import mongoose from 'mongoose';
 
@@ -57,9 +58,9 @@ export const createContactCtrl = async (req, res) => {
 
 export const deleteContactCtrl = async (req, res) => {
   const { id } = req.params;
-  const result = deleteContact(id);
+  const result = await deleteContact(id);
   if (!result) {
-    throw createError.NotFound('Student not found');
+    throw createHttpError(404, 'Student not found');
   }
-  res.status(204);
+  res.status(204).send();
 };

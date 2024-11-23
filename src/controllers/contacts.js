@@ -3,10 +3,9 @@ import {
   findContactById,
   createContact,
   deleteContact,
+  updateContact,
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
-import createError from 'http-errors';
-import mongoose from 'mongoose';
 
 export const getContactsCtrl = async (req, res) => {
   const contacts = await getAllContacts();
@@ -18,25 +17,17 @@ export const getContactsCtrl = async (req, res) => {
 };
 
 export const getContactByIdCtrl = async (req, res, next) => {
-  const { contactId } = req.params;
+  const { id } = req.params;
 
-  try {
-    if (!mongoose.Types.ObjectId.isValid(contactId)) {
-      throw createError.NotFound('Student not found');
-    }
-
-    const contact = await findContactById(contactId);
-    if (!contact) {
-      throw createError.NotFound('Student not found');
-    }
-    res.status(200).send({
-      status: 200,
-      message: 'Successfully found contact with id {contactId}!',
-      data: contact,
-    });
-  } catch (error) {
-    next(error);
+  const contact = await findContactById(id);
+  if (!contact) {
+    throw createHttpError(404, 'Student not found');
   }
+  res.status(200).send({
+    status: 200,
+    message: 'Successfully found contact with id {contactId}!',
+    data: contact,
+  });
 };
 
 export const createContactCtrl = async (req, res) => {
@@ -63,4 +54,20 @@ export const deleteContactCtrl = async (req, res) => {
     throw createHttpError(404, 'Student not found');
   }
   res.status(204).send();
+};
+
+export const updateContactCtrl = async (req, res) => {
+  const { id } = req.params;
+
+  const result = await updateContact(id, req.body);
+
+  if (!result) {
+    throw createHttpError(404, 'Contact not found');
+  }
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully patched a contact!',
+    data: result.contact,
+  });
 };

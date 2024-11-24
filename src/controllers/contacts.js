@@ -21,7 +21,7 @@ export const getContactByIdCtrl = async (req, res, next) => {
 
   const contact = await findContactById(id);
   if (!contact) {
-    throw createHttpError(404, 'Student not found');
+    throw createHttpError(404, 'Contact not found');
   }
   res.status(200).send({
     status: 200,
@@ -51,7 +51,7 @@ export const deleteContactCtrl = async (req, res) => {
   const { id } = req.params;
   const result = await deleteContact(id);
   if (!result) {
-    throw createHttpError(404, 'Student not found');
+    throw createHttpError(404, 'Contact not found');
   }
   res.status(204).send();
 };

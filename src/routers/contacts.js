@@ -20,6 +20,6 @@ router.post('/', jsonParser, ctrlWrapper(createContactCtrl));
 
 router.delete('/:id', ctrlWrapper(deleteContactCtrl));
 
-router.patch('/:id', ctrlWrapper(updateContactCtrl));
+router.patch('/:id', jsonParser, ctrlWrapper(updateContactCtrl));
 
 export default router;

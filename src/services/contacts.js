@@ -21,7 +21,9 @@ export const updateContact = async (id, payload, options = {}) => {
     new: true,
   });
 
-  if (!rawResult) return null;
+  if (!rawResult) {
+    return null;
+  }
 
   return {
     contact: rawResult,

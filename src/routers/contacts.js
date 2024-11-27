@@ -9,7 +9,7 @@ import {
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { validateBody } from '../middlewares/validateBody.js';
-import { contactSchema } from '../validation/contacts.js';
+import { contactSchema, replaceContactSchema } from '../validation/contacts.js';
 
 const jsonParser = express.json();
 
@@ -28,6 +28,12 @@ router.post(
 
 router.delete('/:id', isValidId, ctrlWrapper(deleteContactCtrl));
 
-router.patch('/:id', isValidId, jsonParser, ctrlWrapper(updateContactCtrl));
+router.patch(
+  '/:id',
+  isValidId,
+  jsonParser,
+  validateBody(replaceContactSchema),
+  ctrlWrapper(updateContactCtrl),
+);
 
 export default router;

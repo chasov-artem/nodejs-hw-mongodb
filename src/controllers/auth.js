@@ -7,9 +7,11 @@ export const registrationCtrl = async (req, res) => {
     password: req.body.password,
   };
 
-  const user = await registerUser(payload);
+  const registeredUser = await registerUser(payload);
 
-  console.log(user);
-
-  res.send('Register');
+  res.send({
+    status: 200,
+    message: 'Successfully registered a user!',
+    data: registeredUser,
+  });
 };

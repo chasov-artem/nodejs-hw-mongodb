@@ -14,3 +14,16 @@ export const registerUser = async (payload) => {
 
   return User.create(payload);
 };
+
+export const loginUser = async (email, password) => {
+  const user = await User.findOne({ email });
+  if (user === null) {
+    throw createHttpError(401, 'Email or password is incorrect');
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if (isMatch !== true) {
+    throw createHttpError(401, 'Email or password is incorrect');
+  }
+};

@@ -19,7 +19,26 @@ export const registrationCtrl = async (req, res) => {
 export const loginCtrl = async (req, res) => {
   const { email, password } = req.body;
 
-  await loginUser(email, password);
+  const session = await loginUser(email, password);
 
-  res.send({ status: 200, message: 'Successfully logged in an user!' });
+  res.cookie('refreshToken', session.refreshToken, {
+    httpOnly: true,
+    expires: session.refreshTokenValidUntil,
+  });
+
+  res.cookie('sessionId', session._id, {
+    httpOnly: true,
+    expires: session.refreshTokenValidUntil,
+  });
+
+  res.send({
+    status: 200,
+    message: 'Successfully logged in an user!',
+    data: { accessToken: session.accessToken },
+  });
+};
+
+export const logoutCtrl = async (req, res) => {
+  const { sessionId } = req.cookies;
+  res.send();
 };

@@ -31,11 +31,13 @@ export const loginUser = async (email, password) => {
 
   await Session.deleteOne({ userId: user._id });
 
-  Session.create({
+  const session = await Session.create({
     userId: user._id,
     accessToken: crypto.randomBytes(30).toString('base64'),
     refreshToken: crypto.randomBytes(30).toString('base64'),
     accessTokenValidUntil: new Date(Date.now() + 15 * 60 * 1000),
-    refreshTokenValidUntil: new Date(Date.now() + 30 * 24 * 60 * 1000),
+    refreshTokenValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
   });
+
+  return session;
 };

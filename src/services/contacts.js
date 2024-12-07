@@ -6,6 +6,7 @@ export const getAllContacts = async ({
   sortBy,
   sortOrder,
   filter,
+  userId,
 }) => {
   const skip = page > 0 ? (page - 1) * perPage : 0;
 
@@ -19,7 +20,7 @@ export const getAllContacts = async ({
 
   const [total, contacts] = await Promise.all([
     Contact.countDocuments(query),
-    Contact.find(query)
+    Contact.find({ userId })
       .sort({ [sortBy]: sortOrder })
       .skip(skip)
       .limit(perPage),
@@ -40,8 +41,8 @@ export const getAllContacts = async ({
   };
 };
 
-export const findContactById = async (id) => {
-  return await Contact.findById(id);
+export const findContactById = async (id, userId) => {
+  return Contact.findOne({ _id: id, userId });
 };
 
 export const createContact = async (contact) => {

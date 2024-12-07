@@ -10,6 +10,7 @@ export const registrationCtrl = async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
+    userId: req.user.id,
   };
 
   const registeredUser = await registerUser(payload);

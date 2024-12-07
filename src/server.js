@@ -6,6 +6,7 @@ import authRouter from './routers/auth.js';
 import notFoundHandler from '../src/middlewares/notFoundHandler.js';
 import errorHandler from '../src/middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
+import { auth } from './middlewares/auth.js';
 
 export const setupServer = () => {
   const app = express();
@@ -16,7 +17,7 @@ export const setupServer = () => {
 
   app.use(logger);
 
-  app.use('/contacts', contactsRouter);
+  app.use('/contacts', auth, contactsRouter);
   app.use('/auth', authRouter);
 
   app.use(notFoundHandler);

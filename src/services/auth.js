@@ -43,7 +43,11 @@ export const loginUser = async (email, password) => {
 };
 
 export const logoutUser = async (sessionId) => {
-  await Session.deleteOne({ _id: sessionId });
+  const session = await Session.findById(sessionId);
+  if (session) {
+    session.accessTokenValidUntil = new Date(0);
+    await session.save();
+  }
 };
 
 export const refreshSession = async (sessionId, refreshToken) => {

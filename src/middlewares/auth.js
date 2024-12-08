@@ -4,6 +4,7 @@ import { User } from '../models/user.js';
 
 export const auth = async (req, res, next) => {
   const { authorization } = req.headers;
+
   if (typeof authorization !== 'string') {
     return next(createHttpError(401, 'Please provide access token'));
   }
@@ -17,11 +18,13 @@ export const auth = async (req, res, next) => {
   const session = await Session.findOne({ accessToken });
 
   if (session === null) {
-    return next(createHttpError(401, 'Session not found'));
+    return next(
+      createHttpError(401, 'Session not found or already logged out'),
+    );
   }
 
   if (session.accessTokenValidUntil < new Date()) {
-    return next(createHttpError(401, 'Access token is expired'));
+    return next(createHttpError(401, 'Access token is expired or invalid'));
   }
 
   const user = await User.findById(session.userId);

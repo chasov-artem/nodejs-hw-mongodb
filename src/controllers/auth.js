@@ -46,9 +46,14 @@ export const loginCtrl = async (req, res) => {
 export const logoutCtrl = async (req, res) => {
   const { sessionId } = req.cookies;
 
-  if (sessionId === 'string') {
-    await logoutUser(sessionId);
+  if (!sessionId) {
+    return res.status(400).json({
+      status: 400,
+      message: 'No session found',
+    });
   }
+
+  await logoutUser(sessionId);
 
   res.clearCookie('sessionId');
   res.clearCookie('refreshToken');

@@ -101,5 +101,9 @@ export const resetPasswordCtrl = async (req, res) => {
 
   await resetPassword(password, token);
 
-  res.send({ status: 200 });
+  res.send({
+    status: 200,
+    message: 'Reset password email has been successfully sent.',
+    data: {},
+  });
 };

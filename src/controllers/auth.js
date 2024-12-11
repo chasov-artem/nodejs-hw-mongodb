@@ -4,6 +4,7 @@ import {
   logoutUser,
   refreshSession,
   requestResetPassword,
+  resetPassword,
 } from '../services/auth.js';
 
 export const registrationCtrl = async (req, res) => {
@@ -89,6 +90,16 @@ export const requestResetPasswordCtrl = async (req, res) => {
   console.log(email);
 
   await requestResetPassword(email);
+
+  res.send({ status: 200 });
+};
+
+export const resetPasswordCtrl = async (req, res) => {
+  const { password, token } = req.body;
+
+  console.log({ password, token });
+
+  await resetPassword(password, token);
 
   res.send({ status: 200 });
 };

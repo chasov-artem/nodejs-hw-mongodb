@@ -91,5 +91,32 @@ export const requestResetPassword = async (email) => {
       expiresIn: '5m',
     },
   );
-  console.log(resetToken);
+
+  console.log(`http://localhost:3000/password-reset&token=${resetToken}`);
+};
+
+export const resetPassword = async (newPassword, token) => {
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findOne({ _id: decoded.sub, email: decoded.email });
+
+    if (!user) {
+      throw createHttpError(404, 'User not found');
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await User.findByIdAndUpdate(user._id, { password: hashedPassword });
+  } catch (error) {
+    if (
+      error.name === 'JsonWebTokenError' ||
+      error.name === 'TokenExpiredError'
+    ) {
+      throw createHttpError(401, 'Token error');
+    }
+    console.error(error);
+
+    throw error;
+  }
 };

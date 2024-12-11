@@ -3,6 +3,7 @@ import {
   registrationSchema,
   loginSchema,
   requestResetPasswordSchema,
+  resetPasswordSchema,
 } from '../validation/auth.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import {
@@ -11,6 +12,7 @@ import {
   logoutCtrl,
   refreshCtrl,
   requestResetPasswordCtrl,
+  resetPasswordCtrl,
 } from '../controllers/auth.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
@@ -40,6 +42,13 @@ router.post(
   jsonParser,
   validateBody(requestResetPasswordSchema),
   ctrlWrapper(requestResetPasswordCtrl),
+);
+
+router.post(
+  '/reset-password',
+  jsonParser,
+  validateBody(resetPasswordSchema),
+  ctrlWrapper(resetPasswordCtrl),
 );
 
 export default router;

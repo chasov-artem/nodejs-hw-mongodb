@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 
 import { User } from '../models/user.js';
 import { Session } from '../models/session.js';
+import jwt from 'jsonwebtoken';
 
 export const registerUser = async (payload) => {
   const user = await User.findOne({ email: payload.email });
@@ -74,4 +75,21 @@ export const refreshSession = async (sessionId, refreshToken) => {
     accessTokenValidUntil: new Date(Date.now() + 15 * 60 * 1000),
     refreshTokenValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
   });
+};
+
+export const requestResetPassword = async (email) => {
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+
+  const resetToken = jwt.sign(
+    { sub: user._id, email: user.email },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: '5m',
+    },
+  );
+  console.log(resetToken);
 };

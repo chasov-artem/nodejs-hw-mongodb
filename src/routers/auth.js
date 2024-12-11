@@ -1,11 +1,16 @@
 import express from 'express';
-import { registrationSchema, loginSchema } from '../validation/auth.js';
+import {
+  registrationSchema,
+  loginSchema,
+  requestResetPasswordSchema,
+} from '../validation/auth.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import {
   registrationCtrl,
   loginCtrl,
   logoutCtrl,
   refreshCtrl,
+  requestResetPasswordCtrl,
 } from '../controllers/auth.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
@@ -29,5 +34,12 @@ router.post(
 router.post('/logout', ctrlWrapper(logoutCtrl));
 
 router.post('/refresh', ctrlWrapper(refreshCtrl));
+
+router.post(
+  '/request-reset-password',
+  jsonParser,
+  validateBody(requestResetPasswordSchema),
+  ctrlWrapper(requestResetPasswordCtrl),
+);
 
 export default router;

@@ -3,6 +3,7 @@ import {
   loginUser,
   logoutUser,
   refreshSession,
+  requestResetPassword,
 } from '../services/auth.js';
 
 export const registrationCtrl = async (req, res) => {
@@ -80,4 +81,14 @@ export const refreshCtrl = async (req, res) => {
     message: 'Session refreshed',
     data: { accessToken: session.accessToken },
   });
+};
+
+export const requestResetPasswordCtrl = async (req, res) => {
+  const { email } = req.body;
+
+  console.log(email);
+
+  await requestResetPassword(email);
+
+  res.send({ status: 200 });
 };

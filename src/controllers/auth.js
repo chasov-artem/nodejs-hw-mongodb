@@ -91,7 +91,7 @@ export const requestResetPasswordCtrl = async (req, res) => {
 
   await requestResetPassword(email);
 
-  res.send({ status: 200 });
+  res.send({ status: 200, massage: 'Reset email was sended', data: null });
 };
 
 export const resetPasswordCtrl = async (req, res) => {
@@ -103,7 +103,7 @@ export const resetPasswordCtrl = async (req, res) => {
 
   res.send({
     status: 200,
-    message: 'Reset password email has been successfully sent.',
+    message: 'Password has been successfully reset.',
     data: {},
   });
 };

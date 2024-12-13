@@ -10,6 +10,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendMail = (message) => {
+export const sendMail = async (message) => {
   return transporter.sendMail(message);
 };

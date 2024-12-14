@@ -97,7 +97,7 @@ export const requestResetPassword = async (email) => {
     { sub: user._id, email: user.email },
     process.env.JWT_SECRET,
     {
-      expiresIn: '500m',
+      expiresIn: '5m',
     },
   );
 

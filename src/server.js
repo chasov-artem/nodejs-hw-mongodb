@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'node:path';
 import cors from 'cors';
 import pino from 'pino-http';
 import contactsRouter from './routers/contacts.js';
@@ -11,6 +12,8 @@ import { auth } from './middlewares/auth.js';
 export const setupServer = () => {
   const app = express();
   const logger = pino();
+
+  app.use('/photos', express.static(path.resolve('src/public/photos')));
 
   app.use(cors());
   app.use(cookieParser());

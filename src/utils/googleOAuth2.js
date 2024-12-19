@@ -14,3 +14,14 @@ export function generateOAuthURL() {
     ],
   });
 }
+
+export async function validateCode(code) {
+  try {
+    const token = await googleOAuth2Client.getToken(code);
+
+    console.log(token);
+    // googleOAuth2Client.verifyIdToken()
+  } catch (error) {
+    throw error;
+  }
+}

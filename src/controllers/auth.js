@@ -1,3 +1,4 @@
+import req from 'express/lib/request.js';
 import {
   registerUser,
   loginUser,
@@ -6,7 +7,7 @@ import {
   requestResetPassword,
   resetPassword,
 } from '../services/auth.js';
-import { generateOAuthURL } from '../utils/googleOAuth2.js';
+import { generateOAuthURL, validateCode } from '../utils/googleOAuth2.js';
 
 export const registrationCtrl = async (req, res) => {
   const payload = {
@@ -117,4 +118,12 @@ export const getOAuthURLCtrl = async (req, res) => {
     message: 'Successfully get Google OAuth URL',
     data: url,
   });
+};
+
+export const confirmOAuthCtrl = async (req, res) => {
+  const { code } = req.body;
+
+  await validateCode(code);
+
+  res.send({ status: 200 });
 };

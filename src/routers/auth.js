@@ -13,6 +13,7 @@ import {
   refreshCtrl,
   requestResetPasswordCtrl,
   resetPasswordCtrl,
+  getOAuthURLCtrl,
 } from '../controllers/auth.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
@@ -50,5 +51,7 @@ router.post(
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordCtrl),
 );
+
+router.get('/get-oauth-url', ctrlWrapper(getOAuthURLCtrl));
 
 export default router;

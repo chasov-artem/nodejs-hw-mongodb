@@ -8,6 +8,7 @@ import notFoundHandler from '../src/middlewares/notFoundHandler.js';
 import errorHandler from '../src/middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
 import { auth } from './middlewares/auth.js';
+import swaggerUI from 'swagger-ui-express';
 
 export const setupServer = () => {
   const app = express();

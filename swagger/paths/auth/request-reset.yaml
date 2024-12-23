@@ -1,0 +1,25 @@
+tags:
+  - Auth
+summary: Password reset request
+operationId: requestPasswordReset
+security:
+  - bearerAuth: []
+description: Password reset request.
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            type: string
+            description: User email.
+            example: 'johndoe@mail.com'
+responses:
+  '200':
+    description: The password reset request was successfully completed.
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

@@ -12,16 +12,62 @@ tags:
   - name: Auth
     description: Auth operations.
 servers:
-  - url: http://127.0.0.1:8080
+  - url: http://localhost:3000
+security:
+  - bearerAuth: []
 paths:
   /contacts:
     post:
-      $ref: ../swagger/paths/contacts/post.yaml
+      $ref: '../swagger/paths/contacts/post.yaml'
+    get:
+      $ref: '../swagger/paths/contacts/get.yaml'
   /contacts/{id}:
     get:
-      $ref: ../swagger/paths/contacts/{id}/get.yaml
+      $ref: '../swagger/paths/contacts/{id}/get.yaml'
+    delete:
+      $ref: '../swagger/paths/contacts/{id}/delete.yaml'
+    patch:
+      $ref: '../swagger/paths/contacts/{id}/patch.yaml'
+  /auth/login:
+    post:
+      $ref: '../swagger/paths/auth/login.yaml'
+  /auth/register:
+    post:
+      $ref: '../swagger/paths/auth/register.yaml'
+  /auth/logout:
+    post:
+      $ref: '../swagger/paths/auth/logout.yaml'
+  /auth/refresh:
+    post:
+      $ref: '../swagger/paths/auth/refresh.yaml'
+  /auth/request-reset:
+    post:
+      $ref: '../swagger/paths/auth/request-reset.yaml'
+  /auth/reset-password:
+    post:
+      $ref: '../swagger/paths/auth/reset-password.yaml'
+  /auth/google-url:
+    get:
+      $ref: '../swagger/paths/auth/google-url.yaml'
+  /auth/google-confirm:
+    get:
+      $ref: '../swagger/paths/auth/google-confirm.yaml'
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+  schemas:
+    Contact:
+      $ref: '../swagger/components/schemas/contact.yaml'
+    User:
+      $ref: '../swagger/components/schemas/user.yaml'
+  responses:
+    BadRequest:
+      $ref: '../swagger/components/responses/400.yaml'
+    Unauthorized:
+      $ref: '../swagger/components/responses/401.yaml'
+    NotFound:
+      $ref: '../swagger/components/responses/404.yaml'
+    ServerError:
+      $ref: '../swagger/components/responses/500.yaml'

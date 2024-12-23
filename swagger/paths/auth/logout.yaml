@@ -1,0 +1,14 @@
+tags:
+  - Auth
+summary: User logout.
+operationId: logoutUser
+security:
+  - bearerAuth: []
+description: Session ended successfully.
+responses:
+  '204':
+    description: Session ended successfully.
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

@@ -1,3 +1,4 @@
+import * as fs from 'node:fs';
 import express from 'express';
 import path from 'node:path';
 import cors from 'cors';
@@ -11,7 +12,14 @@ import { auth } from './middlewares/auth.js';
 import swaggerUI from 'swagger-ui-express';
 
 export const setupServer = () => {
+  const swaggerDocument = JSON.parse(
+    fs.readFileSync(path.resolve('docs/swagger.json'), 'utf-8'),
+  );
+
   const app = express();
+
+  app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+
   const logger = pino();
 
   app.use('/photos', express.static(path.resolve('src/public/photos')));

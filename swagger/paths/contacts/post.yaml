@@ -6,6 +6,7 @@ description: 'Create a contact with payload'
 security:
   - bearerAuth: []
 requestBody:
+  required: true
   content:
     multipart/form-data:
       schema:
@@ -15,10 +16,6 @@ requestBody:
           - phoneNumber
           - contactType
         properties:
-          _id:
-            description: "Contact's id"
-            type: string
-            example: '65e4decdd286b30065d54af9'
           name:
             description: "Contact's name"
             type: string
@@ -40,22 +37,10 @@ requestBody:
             type: string
             enum: ['work', 'home', 'personal']
             default: 'personal'
-          userId:
-            description: "Contact's user id"
-            type: string
-            example: '65e4decdd286b30065d54af9'
           photo:
-            description: "Link to contact's photo"
+            description: "Contact's photo"
             type: string
-            example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
-          createdAt:
-            description: 'Time of created'
-            type: string
-            example: '2024-12-21T09:22:25.637Z'
-          updatedAt:
-            description: 'Time of updated'
-            type: string
-            example: '2024-12-21T09:22:25.637Z'
+            format: binary
 responses:
   '201':
     description: Created a contact

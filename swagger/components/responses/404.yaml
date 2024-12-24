@@ -1,4 +1,4 @@
-description: Not Found Error
+description: 'Contact not found'
 content:
   application/json:
     schema:
@@ -21,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Product not found'
+              example: 'Contact not found'

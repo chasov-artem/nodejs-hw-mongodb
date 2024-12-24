@@ -15,7 +15,7 @@ parameters:
     required: true
     description: The unique identifier of the contact to delete.
 responses:
-  '200':
+  '204':
     description: Contact successfully deleted
     content:
       application/json:
@@ -28,7 +28,7 @@ responses:
           properties:
             status:
               type: integer
-              example: 200
+              example: 204
             message:
               type: string
               example: Contact successfully deleted

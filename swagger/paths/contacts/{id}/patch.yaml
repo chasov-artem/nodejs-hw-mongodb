@@ -15,6 +15,7 @@ parameters:
     required: true
     description: The unique identifier of the contact to update.
 requestBody:
+  required: true
   content:
     multipart/form-data:
       schema:
@@ -42,9 +43,9 @@ requestBody:
             enum: ['work', 'home', 'personal']
             default: 'personal'
           photo:
-            description: "Updated contact's photo URL"
+            description: "Updated contact's photo"
             type: string
-            example: https://res.cloudinary.com/uqwgdu/image/upload/image_updated.png
+            format: binary
 responses:
   '200':
     description: Successfully updated contact
@@ -66,8 +67,6 @@ responses:
             data:
               type: object
               $ref: '../../../components/schemas/contact.yaml'
-  '400':
-    $ref: '../../../components/responses/400.yaml'
   '404':
     $ref: '../../../components/responses/404.yaml'
   '401':

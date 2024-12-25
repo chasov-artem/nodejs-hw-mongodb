@@ -1022,7 +1022,8 @@
           "_id",
           "name",
           "phoneNumber",
-          "contactType"
+          "contactType",
+          "userId"
         ],
         "properties": {
           "_id": {
@@ -1085,12 +1086,12 @@
       "user": {
         "type": "object",
         "required": [
-          "id",
+          "_id",
           "name",
           "email"
         ],
         "properties": {
-          "id": {
+          "_id": {
             "type": "string",
             "format": "uuid",
             "description": "User id.",
@@ -1106,6 +1107,12 @@
             "format": "email",
             "description": "User email.",
             "example": "johndoe@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "User password (stored in hashed format on the server).",
+            "example": "StrongP@ssw0rd!"
           },
           "createdAt": {
             "type": "string",

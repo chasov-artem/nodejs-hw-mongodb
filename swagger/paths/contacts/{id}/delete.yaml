@@ -10,7 +10,7 @@ parameters:
     name: id
     schema:
       type: string
-      format: uuid
+      format: guid
       example: '65ca67e7ae7f10c188b598384'
     required: true
     description: The unique identifier of the contact to delete.

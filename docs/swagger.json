@@ -280,9 +280,6 @@
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
           "401": {
             "$ref": "#/components/responses/401"
           },
@@ -374,7 +371,7 @@
             "name": "id",
             "schema": {
               "type": "string",
-              "format": "uuid",
+              "format": "guid",
               "example": "65ca67e7ae7f10c188b598384"
             },
             "required": true,
@@ -466,7 +463,7 @@
             "name": "id",
             "schema": {
               "type": "string",
-              "format": "uuid",
+              "format": "guid",
               "example": "65e4decdd286b30065d54af9"
             },
             "required": true,
@@ -1009,126 +1006,6 @@
         "scheme": "bearer"
       }
     },
-    "schemas": {
-      "Contact": {
-        "$ref": "#/components/schemas/contact"
-      },
-      "User": {
-        "$ref": "#/components/schemas/user"
-      },
-      "contact": {
-        "type": "object",
-        "required": [
-          "_id",
-          "name",
-          "phoneNumber",
-          "contactType",
-          "userId"
-        ],
-        "properties": {
-          "_id": {
-            "description": "Contact's id",
-            "type": "string",
-            "example": "65e4decdd286b30065d54af9"
-          },
-          "name": {
-            "description": "Contact's name",
-            "type": "string",
-            "example": "John Doe"
-          },
-          "phoneNumber": {
-            "description": "Contact's phone number",
-            "type": "number",
-            "example": 12
-          },
-          "email": {
-            "description": "Contact email",
-            "type": "string",
-            "example": "johndoe@mail.com"
-          },
-          "isFavourite": {
-            "description": "Is favourite",
-            "type": "boolean",
-            "example": false
-          },
-          "contactType": {
-            "description": "Contact's type",
-            "type": "string",
-            "enum": [
-              "work",
-              "home",
-              "personal"
-            ],
-            "default": "personal"
-          },
-          "userId": {
-            "description": "Contact's user id",
-            "type": "string",
-            "example": "65e4decdd286b30065d54af9"
-          },
-          "photo": {
-            "description": "Link to contact's photo",
-            "type": "string",
-            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
-          },
-          "createdAt": {
-            "description": "Time of created",
-            "type": "string",
-            "example": "2024-12-21T09:22:25.637Z"
-          },
-          "updatedAt": {
-            "description": "Time of updated",
-            "type": "string",
-            "example": "2024-12-21T09:22:25.637Z"
-          }
-        }
-      },
-      "user": {
-        "type": "object",
-        "required": [
-          "_id",
-          "name",
-          "email"
-        ],
-        "properties": {
-          "_id": {
-            "type": "string",
-            "format": "uuid",
-            "description": "User id.",
-            "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
-          },
-          "name": {
-            "type": "string",
-            "description": "User name.",
-            "example": "John Doe"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "description": "User email.",
-            "example": "johndoe@mail.com"
-          },
-          "password": {
-            "type": "string",
-            "format": "password",
-            "description": "User password (stored in hashed format on the server).",
-            "example": "StrongP@ssw0rd!"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "User creation date.",
-            "example": "2024-01-01T12:00:00Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The date the user last updated.",
-            "example": "2024-01-10T15:30:00Z"
-          }
-        }
-      }
-    },
     "responses": {
       "400": {
         "description": "BadRequestError",
@@ -1289,6 +1166,121 @@
       },
       "ServerError": {
         "$ref": "#/components/responses/500"
+      }
+    },
+    "schemas": {
+      "contact": {
+        "type": "object",
+        "required": [
+          "_id",
+          "name",
+          "phoneNumber",
+          "contactType",
+          "userId"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Contact's id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "name": {
+            "description": "Contact's name",
+            "type": "string",
+            "example": "John Doe"
+          },
+          "phoneNumber": {
+            "description": "Contact's phone number",
+            "type": "number",
+            "example": 12
+          },
+          "email": {
+            "description": "Contact email",
+            "type": "string",
+            "example": "johndoe@mail.com"
+          },
+          "isFavourite": {
+            "description": "Is favourite",
+            "type": "boolean",
+            "example": false
+          },
+          "contactType": {
+            "description": "Contact's type",
+            "type": "string",
+            "enum": [
+              "work",
+              "home",
+              "personal"
+            ],
+            "default": "personal"
+          },
+          "userId": {
+            "description": "Contact's user id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "photo": {
+            "description": "Link to contact's photo",
+            "type": "string",
+            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+          },
+          "createdAt": {
+            "description": "Time of created",
+            "type": "string",
+            "example": "2024-12-21T09:22:25.637Z"
+          },
+          "updatedAt": {
+            "description": "Time of updated",
+            "type": "string",
+            "example": "2024-12-21T09:22:25.637Z"
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "required": [
+          "_id",
+          "name",
+          "email",
+          "password"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "User id.",
+            "example": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+          },
+          "name": {
+            "type": "string",
+            "description": "User name.",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User email.",
+            "example": "johndoe@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "User password (stored in hashed format on the server).",
+            "example": "StrongP@ssw0rd!"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "User creation date.",
+            "example": "2024-01-01T12:00:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date the user last updated.",
+            "example": "2024-01-10T15:30:00Z"
+          }
+        }
       }
     }
   }

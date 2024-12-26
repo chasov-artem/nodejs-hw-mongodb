@@ -10,7 +10,7 @@ parameters:
     name: id
     schema:
       type: string
-      format: uuid
+      format: guid
       example: '65e4decdd286b30065d54af9'
     required: true
     description: The unique identifier of the contact to update.

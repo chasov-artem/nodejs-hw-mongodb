@@ -7,6 +7,16 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const uploadToCloudinary = (filePath) => {
-  return cloudinary.v2.uploader.upload(filePath);
+export const uploadToCloudinary = async (filePath) => {
+  try {
+    console.log('Uploading file to Cloudinary:', filePath);
+    const result = await cloudinary.v2.uploader.upload(filePath, {
+      folder: 'contacts_photos',
+    });
+    console.log('Cloudinary upload successful:', result);
+    return result;
+  } catch (error) {
+    console.error('Cloudinary upload error:', error.message);
+    throw error;
+  }
 };

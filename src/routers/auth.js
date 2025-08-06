@@ -4,6 +4,7 @@ import {
   loginSchema,
   requestResetPasswordSchema,
   resetPasswordSchema,
+  confirmOAuthSchema,
 } from '../validation/auth.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import {
@@ -13,6 +14,8 @@ import {
   refreshCtrl,
   requestResetPasswordCtrl,
   resetPasswordCtrl,
+  getOAuthURLCtrl,
+  confirmOAuthCtrl,
 } from '../controllers/auth.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
@@ -49,6 +52,15 @@ router.post(
   jsonParser,
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordCtrl),
+);
+
+router.get('/get-oauth-url', ctrlWrapper(getOAuthURLCtrl));
+
+router.post(
+  '/confirm-oauth',
+  jsonParser,
+  validateBody(confirmOAuthSchema),
+  ctrlWrapper(confirmOAuthCtrl),
 );
 
 export default router;

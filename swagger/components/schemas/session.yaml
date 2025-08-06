@@ -1,0 +1,38 @@
+type: object
+required:
+  - _id
+  - userId
+  - accessToken
+  - refreshToken
+  - accessTokenValidUntil
+  - refreshTokenValidUntil
+properties:
+  _id:
+    type: string
+    format: uuid
+    description: Session identifier.
+  userId:
+    type: string
+    description: Reference to the user object Id.
+  accessToken:
+    type: string
+    description: Access token for authorization.
+  refreshToken:
+    type: string
+    description: Refresh token for obtaining a new access token.
+  accessTokenValidUntil:
+    type: string
+    format: date-time
+    description: Access token expiry time.
+  refreshTokenValidUntil:
+    type: string
+    format: date-time
+    description: Refresh token expiry time.
+  createdAt:
+    type: string
+    format: date-time
+    description: Session creation time.
+  updatedAt:
+    type: string
+    format: date-time
+    description: Session update time.

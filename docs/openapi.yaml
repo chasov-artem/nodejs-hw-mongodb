@@ -1,0 +1,68 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Contacts app
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: This is a documentation of contacts app
+tags:
+  - name: Contacts
+    description: Operations about users.
+  - name: Auth
+    description: Auth operations.
+servers:
+  - url: https://nodejs-hw-mongodb-8-hw7-swagger2.onrender.com
+security:
+  - bearerAuth: []
+paths:
+  /contacts:
+    post:
+      $ref: '../swagger/paths/contacts/post.yaml'
+    get:
+      $ref: '../swagger/paths/contacts/get.yaml'
+  /contacts/{id}:
+    get:
+      $ref: '../swagger/paths/contacts/{id}/get.yaml'
+    delete:
+      $ref: '../swagger/paths/contacts/{id}/delete.yaml'
+    patch:
+      $ref: '../swagger/paths/contacts/{id}/patch.yaml'
+  /auth/login:
+    post:
+      $ref: '../swagger/paths/auth/login.yaml'
+  /auth/register:
+    post:
+      $ref: '../swagger/paths/auth/register.yaml'
+  /auth/logout:
+    post:
+      $ref: '../swagger/paths/auth/logout.yaml'
+  /auth/refresh:
+    post:
+      $ref: '../swagger/paths/auth/refresh.yaml'
+  /auth/request-reset:
+    post:
+      $ref: '../swagger/paths/auth/request-reset.yaml'
+  /auth/reset-password:
+    post:
+      $ref: '../swagger/paths/auth/reset-password.yaml'
+  /auth/google-url:
+    get:
+      $ref: '../swagger/paths/auth/google-url.yaml'
+  /auth/google-confirm:
+    get:
+      $ref: '../swagger/paths/auth/google-confirm.yaml'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  responses:
+    BadRequest:
+      $ref: '../swagger/components/responses/400.yaml'
+    Unauthorized:
+      $ref: '../swagger/components/responses/401.yaml'
+    NotFound:
+      $ref: '../swagger/components/responses/404.yaml'
+    ServerError:
+      $ref: '../swagger/components/responses/500.yaml'
